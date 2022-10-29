@@ -12,12 +12,9 @@ class Science extends StatefulWidget {
 }
 
 class _ScienceState extends State<Science> {
-  @override
-  initState() {
-    Provider.of<Newsprovider>(context,listen: false).getdata(CategoryName: 'science');
-  }
+
   Widget build(BuildContext context) {
-    return Provider.of<Newsprovider>(context).loading==true?
+    return Provider.of<Newsprovider>(context).Sciencedata.isEmpty?
     Center(
       child: CircularProgressIndicator(),
     )
@@ -36,7 +33,12 @@ class _ScienceState extends State<Science> {
                 child: FadeInImage.assetNetwork(
                   height: 100,
                   placeholder: 'images/placehorder.jpg',
-                  image:Provider.of<Newsprovider>(context).Sciencedata[index]['urlToImage']??'',
+                  image:Provider.of<Newsprovider>(context).Sciencedata[index]['urlToImage']??'',imageErrorBuilder: (c, v, b) {
+                  return Image.asset(
+                    'images/placehorder.jpg',
+                    height: 100,
+                  );
+                },
                   fit: BoxFit.cover,)
             ),
           ),
